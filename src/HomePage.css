@@ -1,0 +1,62 @@
+.logo1 {
+
+    margin-top: 25px;
+    margin-left: 70px;
+    height: 38px;
+    width: 236px;
+}
+
+.homePage--div {
+   
+    height: 1080px;
+    width: 1920px;
+    background-image: url(images/shutterstock_2189773743\ 1.png);
+}
+
+.hr1 {
+ 
+    height: 0px;
+    width: 1780px;
+    margin-top: 26px;
+    margin-right: 70px;
+    margin-left: 70px;
+    border: 1px solid #1A1A1A;
+}
+
+.logo2 {
+    position:absolute;
+    top: 473px;
+    left: 1076px;
+}
+
+
+   
+
+.addCV-btn {
+
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 464px;
+    height: 60px;
+    background: #1A1A1A;
+    border-radius: 8px;
+    border: none;
+    margin-top: 424px;
+    margin-left: 728px;
+    text-decoration: none;
+   
+   
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    
+
+}
+.link {
+    text-decoration: none;
+}
+
