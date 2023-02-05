@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import "./PersonalInfo.css"
 import Smallinputs from './components/Smallinputs'
-import { BsChevronLeft } from "react-icons/bs"
-
+import LargeInput from './components/LargeInput'
+import { BsChevronLeft, BsTelephoneFill } from "react-icons/bs"
+import emailicon from "./images/Vector.png"
 const PersonalInfo = () => {
 
 
@@ -13,7 +14,8 @@ const PersonalInfo = () => {
         surname: "",
         email: "",
         phone_number: "",
-        image: ""
+        image: "" ,
+        about_me:"" 
 
     })
 
@@ -25,9 +27,9 @@ const PersonalInfo = () => {
         const newFormData = { ...formData, [name]: value }
         setFormData(newFormData)
     }
-    
+
     const handleImage = (e) => {
-        
+
         setFormData((prevValues) => {
             return {
                 ...prevValues,
@@ -66,17 +68,40 @@ const PersonalInfo = () => {
                         <div className='photo--div'>
                             <h1 className='photo-note'>პირადი ფოტოს ატვირთვა</h1>
                             <label className='photo--label'>
-                            <input
-                                onChange={handleImage}
-                                type="file"
-                                name='image'
-                                multiple accept='image/png, image/jpeg , image/webp'
-                                className='photo-upload-btn'
+                                <input
+                                    onChange={handleImage}
+                                    type="file"
+                                    name='image'
+                                    multiple accept='image/png, image/jpeg , image/webp'
+                                    className='photo-upload-btn'
                                 />
                                 ატვირთვა
                             </label>
 
                         </div>
+
+                        <div className='about-div'>
+                            <h2 className='aboutme-header'>ჩემ შესახებ (არასავალდებულო)</h2>
+                            <input 
+                            name='about_me'
+                            onChange={handleChange}
+                            className='about-input'></input>
+
+                        </div>
+
+                        <LargeInput
+                            name="ელ.ფოსტა"
+                            note="უნდა მთავრდებოდეს @redberry.ge-ით"
+                            formDataName="email"
+                            handleChange={handleChange}
+                        />
+
+                        <LargeInput
+                            name="მობილურის ნომერი"
+                            note="უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"
+                            formDataName="phone_number"
+                            handleChange={handleChange}
+                        />
                     </div>
                 </section>
 
@@ -84,8 +109,38 @@ const PersonalInfo = () => {
 
 
                 <section className='cv-section'>
-                    <h2>{formData.name} {formData.surname}</h2>
-                    <img  className="uploadedphoto"src={imageUploaded} alt=""></img>
+                    <div className='cv--maindiv'>
+                        <div className='cv-section-1'>
+                            <div className='cv-namesurname-div'>
+                                <h2>{formData.name} </h2>
+                                <h2 className='cv-surname'>{formData.surname}</h2>
+                            </div>
+                            <div className='cv-email-div'> 
+                            {formData.email &&  <img src={emailicon }></img>} 
+
+                            
+                                <p className='cv-email'>{formData.email}</p>
+                            </div>
+                            <div className='cv-phoneNumber-div'>
+                            {
+                                formData.phone_number &&  <BsTelephoneFill />
+                            }
+                               
+                                <p className='cv-phoneNumber'>{formData.phone_number}</p>
+                            </div>
+                            <div className='cv-aboutme-div'>
+                            {formData.about_me  && 
+                            <h2 className='cv-aboutme-header'>ჩემ შესახებ</h2>
+                            }
+
+                            <p className='cv-aboutme-text'>{formData.about_me}</p>
+                           
+
+                            </div>
+                        </div>
+
+                        <img className="uploadedphoto" src={imageUploaded} alt=""></img>
+                    </div>
 
                 </section>
             </div>

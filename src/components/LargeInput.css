@@ -1,0 +1,49 @@
+.LargeInput-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px 24px;
+    gap: 8px;
+    width: 798px;
+    height: 122px;
+    margin-top: 17px;
+}
+
+.LargeInput-header {
+    display: flex;
+    width: 798px;
+    height: 21px;
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+
+}
+
+.LargeInput-note {
+    width: 798px;
+    height: 21px;
+
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #2E2E2E;
+}
+
+.LargeInput-input {
+    width: 798px;
+    height: 48px;
+
+    background: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    border-radius: 4px;
+   
+
+}

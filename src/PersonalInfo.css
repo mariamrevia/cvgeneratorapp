@@ -11,7 +11,6 @@
 .info-section {
     display: flex;
     flex-direction: column;
-
     width: 1098px;
     height: 1080px;
     background-color: #F9F9F9;
@@ -38,6 +37,7 @@
 
 .cv-section {
     display: flex;
+    justify-content: center;
     width: 822px;
     height: 1080px;
     background-color: white;
@@ -51,10 +51,6 @@
     height: 0px;
     margin-right: auto;
     margin-left: auto;
-
-
-    /* off black */
-
     border: 1px solid #1A1A1A;
 
 }
@@ -95,8 +91,6 @@
 
 
 /* photo uploading section */
-
-
 .photo--div {
 
     display: flex;
@@ -117,6 +111,7 @@
     margin-left: 19px;
     background-color: #0E80BF;
     border-radius: 4px;
+
 
 
     font-family: HelveticaNeue;
@@ -155,6 +150,139 @@
     border-radius: 50%;
     width: 246px;
     height: 246px;
+    margin-top: 48px;
+    object-fit: cover;
 }
 
 /*  */
+
+
+
+/* cv-section */
+
+.cv--maindiv {
+    display: flex;
+    width: 662px;
+    justify-content: space-between;
+}
+
+.cv-namesurname-div {
+    display: flex;
+    height: 43px;
+    margin-top: 68px;
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 42px;
+    color: #F93B1D;
+
+}
+
+.cv-surname {
+    display: flex;
+    margin-left: 22px;
+}
+
+.cv-email {
+    display: flex;
+    width: 200px;
+    height: 21px;
+
+    margin-left: 11.67px;
+}
+
+.cv-phoneNumber {
+    display: flex;
+    width: 200px;
+    height: 21px;
+    margin-left: 11.81px;
+
+}
+
+.cv-phoneNumber-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    height: 21px;
+}
+
+.cv-email-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
+    height: 21px;
+    margin-top: 17px;
+}
+
+
+.cv-section-1 {
+    display: flex;
+    flex-direction: column;
+    inline-size: 300px;
+
+}
+
+
+.cv-aboutme-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 34px;
+
+}
+
+.cv-aboutme-header {
+    width: 118px;
+    height: 22px;
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #F93B1D;
+
+}
+
+.cv-aboutme-text {
+    display: flex;
+    margin-top: 15px;
+    inline-size: 300px;
+
+}
+
+/* ------------------ */
+
+.about-div {
+    width: 798px;
+    height: 148px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 41px;
+}
+
+.aboutme-header {
+    width: 798px;
+    height: 21px;
+    margin-top: 8px;
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.about-input {
+
+    width: 798px;
+    height: 103px;
+
+    background: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    border-radius: 4px;
+    margin-top: 8px;
+}
