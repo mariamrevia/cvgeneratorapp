@@ -1,0 +1,160 @@
+.Main--div {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    min-width: 100%;
+    min-height: 100vh;
+
+
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+
+    width: 1098px;
+    height: 1080px;
+    background-color: #F9F9F9;
+}
+
+.header--div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 899px;
+    margin-top: 47px;
+    margin-left: 48px;
+}
+
+.info-section-div {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+
+}
+
+
+.cv-section {
+    display: flex;
+    width: 822px;
+    height: 1080px;
+    background-color: white;
+}
+
+
+
+.hr2 {
+    display: flex;
+    width: 798px;
+    height: 0px;
+    margin-right: auto;
+    margin-left: auto;
+
+
+    /* off black */
+
+    border: 1px solid #1A1A1A;
+
+}
+
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    width: 179px;
+    height: 40px;
+    margin-left: 61px;
+    top: 47px;
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 29px;
+    color: #1A1A1A;
+    font-variant: small-caps;
+}
+
+
+
+.back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    left: 48px;
+    top: 45px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+
+}
+
+
+/* photo uploading section */
+
+
+.photo--div {
+
+    display: flex;
+    height: 27px;
+    width: 798px;
+    margin-top: 46px;
+}
+
+.photo--label {
+    display: flex;
+    background: none;
+    align-items: center;
+    justify-content: center;
+    width: 107px;
+    height: 27px;
+    color: white;
+    text-align: center;
+    margin-left: 19px;
+    background-color: #0E80BF;
+    border-radius: 4px;
+
+
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+}
+
+.photo-upload-btn {
+
+    width: 107px;
+    height: 27px;
+    display: none;
+    margin-left: 19px;
+
+}
+
+.photo-note {
+    display: flex;
+    align-self: center;
+    width: 232px;
+    height: 22px;
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #1A1A1A;
+
+
+}
+
+.uploadedphoto {
+    border-radius: 50%;
+    width: 246px;
+    height: 246px;
+}
+
+/*  */
