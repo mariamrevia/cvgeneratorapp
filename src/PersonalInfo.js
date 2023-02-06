@@ -64,7 +64,7 @@ const PersonalInfo = () => {
         if (Object.keys(errors).length !== 0) {
             return
         }
-        navigate("/Thirdpage", {
+        navigate("/experiencePage", {
             state: { formDatas: formData }
         })
     }
