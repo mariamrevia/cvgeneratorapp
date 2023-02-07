@@ -9,7 +9,8 @@ const LargeInput = ({
   handleChange,
   formData,
   error,
-  isValid
+  value
+
 
 }) => {
 
@@ -27,12 +28,13 @@ const LargeInput = ({
   return (
     <div className='LargeInput-div'>
       <h2 className={error ? "err-LargeInput-header" : 'LargeInput-header'}>{name}</h2>
-
+  
       <div className={` ${handleClass()}`}>
         <input
           name={formDataName}
           onChange={handleChange}
           className="LargeInput-input"
+          value={value}
         >
 
         </input>
