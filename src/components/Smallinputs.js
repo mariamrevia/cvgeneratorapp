@@ -12,7 +12,8 @@ const Smallinputs = ({
     handleChange,
     formData1,
     formData2,
-
+    value1,
+    value2,
     error1,
     error2
 
@@ -29,7 +30,7 @@ const Smallinputs = ({
         }
     }
 
-    function handleClass2 () {
+    function handleClass2() {
         if (!formData2) {
             return "small--input--div"
         } else if (error2) {
@@ -47,6 +48,7 @@ const Smallinputs = ({
                     <input
                         onChange={handleChange}
                         name={formDataName}
+                        value={value1}
                         className={"small--input"}></input>
                     {formData1 && !error1 ? <AiFillCheckCircle className='BsCheckCircle' /> : ""
                     }
@@ -57,10 +59,11 @@ const Smallinputs = ({
                 <h2 className={error2 ? "err-input--name" : 'input--name'}> {surname}</h2>
                 <div className={` ${handleClass2()}`}>
                     <input
+                        value={value2}
                         onChange={handleChange}
                         name={formDataSurname}
                         className='small--input'></input>
-                         {formData2 && !error2 ? <AiFillCheckCircle className='BsCheckCircle' /> : ""
+                    {formData2 && !error2 ? <AiFillCheckCircle className='BsCheckCircle' /> : ""
                     }
                 </div>
                 <p className='input-note'>{error2 ? error1 : note}</p>
