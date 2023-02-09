@@ -57,13 +57,13 @@ const PersonalInfo = () => {
         const { name, value } = e.target
         const newFormData = { ...formData, [name]: value }
 
-        setFormData(newFormData)
-
-        localStorage.setItem("formData", JSON.stringify(formData))
+        
+        localStorage.setItem("formData", JSON.stringify(newFormData))
         if (formData) {
-            const errors = validate(formData)
+            const errors = validate(newFormData)
             setFormErrors(errors)
         }
+        setFormData(newFormData)
 
 
     }
@@ -191,9 +191,11 @@ const PersonalInfo = () => {
                                 />
                                 ატვირთვა
                             </label>
-                            {formErrors.image && !formData.image ?
+                          
+                            {formErrors.image?
                                 <BsFillExclamationTriangleFill
-                                    className='Exclamation-icon-err' /> : <AiFillCheckCircle className="BsCheckCircle-img" />}
+                                    className='Exclamation-icon-err' /> : !formData.image ? "" :
+                                    <AiFillCheckCircle className="BsCheckCircle-img" />}
                         </div>
 
                         <div className='about-div'>
@@ -215,8 +217,8 @@ const PersonalInfo = () => {
                             error={formErrors.email}
                             formData={formData.email}
                             value={formData.email}
-
                         />
+                        
                         <LargeInput
                             name="მობილურის ნომერი"
                             note="უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"
@@ -239,6 +241,7 @@ const PersonalInfo = () => {
                             email={formData.email}
                             phone_number={formData.phone_number}
                             about_me={formData.about_me}
+                            formData={formData}
                             imageUploaded={imageUploaded}
 
                         />

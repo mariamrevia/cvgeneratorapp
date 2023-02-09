@@ -1,6 +1,7 @@
 import React from 'react'
 import "./LargeInput.css"
 import { AiFillCheckCircle } from "react-icons/ai"
+import {BsFillExclamationTriangleFill} from "react-icons/bs"
 
 const LargeInput = ({
   name,
@@ -27,6 +28,7 @@ const LargeInput = ({
 
   return (
     <div className='LargeInput-div'>
+    
       <h2 className={error ? "err-LargeInput-header" : 'LargeInput-header'}>{name}</h2>
   
       <div className={` ${handleClass()}`}>
@@ -42,6 +44,10 @@ const LargeInput = ({
          }
       </div>
       <p className='LargeInput-note'> {error ? error : note} </p>
+      
+      {/* <div>
+      {error ? <BsFillExclamationTriangleFill/> : ""}
+      </div> */}
     </div>
 
   )
