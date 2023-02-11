@@ -14,7 +14,7 @@ const Dates = ({
         <div>
 
             <div className='data--div'>
-                <div className={`${hanldeClass ()}`}>
+                <div >
                     <h2 className='startDate'>დაწყების თარიღი</h2>
                     <input
                         type="date"

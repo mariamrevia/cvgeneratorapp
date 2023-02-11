@@ -1,0 +1,142 @@
+.edu-section {
+    display: flex;
+    flex-direction: column;
+    width: 1098px;
+    min-height: 100vh;
+    background-color: #F9F9F9;
+
+}
+
+.edu-section-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 52px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.date {
+    display: flex;
+    flex-direction: row;
+    width: 798px;
+    justify-content: space-between;
+}
+
+
+/* ------------ */
+
+
+.degree-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}
+
+.degree-dropdown {
+
+    width: 371px;
+    height: 48px;
+    position: relative;
+    background-color: white;
+    border-radius: 4px;
+    margin-top: 0px;
+    border-width: 1px;
+    border: 1px solid #BCBCBC;
+
+
+}
+
+.dropdown-btn {
+
+    width: 371px;
+    height: 48px;
+    color: rgba(0, 0, 0, 0.6);
+    border-width: 2px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.dropdown--content {
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+    box-shadow: 3px 3px 20px 3px rgb(241, 240, 240);
+    background: white;
+    width: 100%;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+}
+
+.dropdownItem {
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+}
+
+.dropdownItem:hover {
+    background-color: #E7F0F8;
+
+}
+
+.degree-hd {
+    width: 371px;
+    height: 21px;
+    margin-bottom: 8px;
+
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+.description-edu {
+
+
+    width: 798px;
+    height: 179px;
+
+    background: #FFFFFF;
+    border: 1px solid #BCBCBC;
+    border-radius: 4px;
+    margin-top: 8px;
+
+}
+
+.description-edu:focus {
+
+    outline: none;
+}
+
+.description-edu-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 34px;
+    height: 208px;
+    width: 798px;
+
+
+}
+
+.description-hd-edu {
+    width: 798px;
+    height: 21px;
+
+
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+}

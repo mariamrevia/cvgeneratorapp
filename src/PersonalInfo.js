@@ -26,6 +26,7 @@ const PersonalInfo = () => {
         image: "",
         about_me: ""
 
+
     })
 
     console.log(formData)
@@ -39,9 +40,6 @@ const PersonalInfo = () => {
 
     }, [])
 
-    // useEffect(() => {
-    //     localStorage.setItem("formData", JSON.stringify(formData))
-    // }, [formData])
 
     useEffect(() => {
         const image = JSON.parse(localStorage.getItem("image"))
@@ -64,6 +62,7 @@ const PersonalInfo = () => {
             setFormErrors(errors)
         }
         setFormData(newFormData)
+        console.log(formErrors)
 
 
     }
@@ -94,6 +93,7 @@ const PersonalInfo = () => {
         setIsSubmit(true)
         const errors = validate(formData)
         setFormErrors(errors)
+        console.log(errors)
         if (Object.keys(errors).length !== 0) {
             return
         }
@@ -102,6 +102,7 @@ const PersonalInfo = () => {
                 formDatas: formData, imageUploaded
             }
         })
+
     }
 
 
@@ -241,7 +242,7 @@ const PersonalInfo = () => {
                             email={formData.email}
                             phone_number={formData.phone_number}
                             about_me={formData.about_me}
-                            formData={formData}
+                            // formData={formData}
                             imageUploaded={imageUploaded}
 
                         />

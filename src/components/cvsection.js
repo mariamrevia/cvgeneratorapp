@@ -11,17 +11,12 @@ const Cvsection = ({
     phone_number,
     about_me,
     imageUploaded,
-
-    formData
-
-
+    formData1
+    
+    
 }) => {
 
-
-
     return (
-
-
         <div className='cv-div'>
             <div className='cv--maindiv'>
                 <div className='cv-section-1'>
@@ -47,41 +42,43 @@ const Cvsection = ({
                     }
                     <div>
 
-                    <hr className='cv-hr'></hr>
+                        <hr className='cv-hr'></hr>
+                        
+                              {
+                                formData1 && 
+                               
+                                <h2 className='cv-experience-hd'>გამოცდილება</h2> 
+                              }
 
-                    <h2 className='cv-experience-hd'>გამოცდილება</h2>
                         {
-                            formData.experience.map((exp) => {
+                            formData1 && formData1.experience.map((exp,index) => {
                                 return (
 
-                                    <div className='cv-experience-div'>
-                                       
+                                    <div key={index} className='cv-experience-div'>
+
                                         <div className='cv-posempl-div'>
-                                        <h3 className='cv-position'>{exp.position}</h3>
-                                        <h2 className="cv-employer">{exp.employer}</h2>
+                                            <h3 className='cv-position'>{exp.position}</h3>
+                                            <h2 className="cv-employer">{exp.employer}</h2>
                                         </div>
                                         <div className='cv-date-diiv'>
                                             <span className='cv-start-date'>{exp.start_date}</span>
                                             <span className='cv-due-date'>{exp.due_date}</span>
                                         </div>
                                         <div>
-                                        <p className='cv-description'>{exp.description}</p>
+                                            <p className='cv-description'>{exp.description}</p>
                                         </div>
                                     </div>
-
-
                                 )
                             })
                         }
                     </div>
                 </div>
-
                 <div>
                     <img className="uploadedphoto" src={imageUploaded} alt=""></img>
                 </div>
 
             </div>
-            <img className="Logo"src={logo1} alt=""></img>
+            <img className="Logo" src={logo1} alt=""></img>
         </div>
     )
 }
