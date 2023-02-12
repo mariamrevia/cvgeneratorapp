@@ -7,19 +7,16 @@ import { useNavigate } from 'react-router-dom'
 import Header from './components/Header'
 import "./education.css"
 import Degrees from './components/degrees'
-import { BsChevronDown, BsChevronUp } from "react-icons/bs"
 
 const Education = () => {
     const [degrees, setDegrees] = useState([])
     const [degreeSelected, setDegreeSelected] = useState("")
     const [isActive, setIsActive] = useState(false)
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const location = useLocation()
     const { formDatas = {} } = location.state || {}
-
-
-    console.log(formDatas)
+    const { imageUploaded } = location.state || {}
     const [formData, setFormData] = useState(
         {
             name: formDatas.name || "",
@@ -29,7 +26,12 @@ const Education = () => {
             image: formDatas.image || "",
             about_me: formDatas.about_me || "",
 
-
+            educations: [{
+                institute: "",
+                degree: "",
+                due_date: "",
+                description: "",
+            }],
             experience: formDatas.experience ? formDatas.experience.map(exp => ({
                 position: exp.position,
                 employer: exp.employer,
@@ -44,26 +46,8 @@ const Education = () => {
                 description: "",
             }],
 
-            educations: formDatas.educations ? formDatas.educations.map(edu => ({
-                institute: edu.institute,
-                degree: edu.degree,
-                due_date: edu.due_date,
-                description: edu.description,
-            })) : [{
-                institute: "",
-                degree: "",
-                due_date: "",
-                description: "",
-            }],
-        }
-    );
 
-
-
-
-
-
-
+        });
 
     const fetchdegrees = () => {
         fetch("https://resume.redberryinternship.ge/api/degrees")
@@ -75,33 +59,41 @@ const Education = () => {
         fetchdegrees()
     }, [])
 
+    useEffect(() => {
+        const data = localStorage.getItem("eduData")
+        if (data) {
+            setFormData(JSON.parse(data))
+        }
 
+    }, [])
 
-    console.log(degrees)
     console.log(formData)
-
-
     // const handleClick = () => {
 
     // }
-    const handleChange = (e,index) => {
-        e.preventDefault ()
-        const {name , value} =e.target
-        const newEducation ={ ...formData.educations}
-        newEducation[index][name]=value
+
+
+    const handleChange = useCallback((e, index) => {
+        e.preventDefault()
+        const { name, value } = e.target
+        const newEducation = [...formData.educations]
+        newEducation[index][name] = value
 
         const newFormData = {
             ...formData,
-            educations:newEducation
+            educations: newEducation
         }
-        
 
-    }
+        setFormData(newFormData)
+        localStorage.setItem("eduData", JSON.stringify(newFormData))
 
-    const handleaddform =  useCallback (() => {
-        setFormData ({
-            ...formData ,
-            educations:[
+    }, [formData])
+
+
+    const handleaddform = useCallback(() => {
+        setFormData({
+            ...formData,
+            educations: [
                 ...formData.educations, {
                     institute: "",
                     degree: "",
@@ -113,7 +105,7 @@ const Education = () => {
         })
 
 
-    })
+    }, [formData])
 
     return (
 
@@ -127,6 +119,7 @@ const Education = () => {
                         return (
                             <div key={index} className="edu-section-div">
                                 <LargeInput
+
                                     formDataName="institute"
                                     name="სასწავლებელი"
                                     note="მინიმუმ 2 სიმბოლო"
@@ -137,6 +130,8 @@ const Education = () => {
 
                                 <div className='date'>
                                     <Degrees
+                                        formData={formData}
+                                        name="degree"
                                         value={edu.degree}
                                         degrees={degrees}
                                         degreeSelected={degreeSelected}
@@ -158,8 +153,9 @@ const Education = () => {
                                     <h2
                                         className='description-hd-edu'>აღწერა</h2>
                                     <textarea
+                                        name="description"
                                         className='description-edu'
-                                        handleChange={(e) => handleChange(e, index)}
+                                        onChange={(e) => handleChange(e, index)}
                                         value={edu.description}
                                     />
                                 </div>
@@ -179,7 +175,18 @@ const Education = () => {
                 </form>
             </section>
             <section className='cv-section'>
-                <Cvsection />
+                <Cvsection
+                    name={formData.name}
+                    surname={formData.surname}
+                    email={formData.email}
+                    phone_number={formData.phone_number}
+                    about_me={formData.about_me}
+                    imageUploaded={imageUploaded}
+                    formData1={formData}
+
+
+
+                />
 
             </section>
         </div>

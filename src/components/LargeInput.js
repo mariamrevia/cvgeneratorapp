@@ -19,7 +19,7 @@ const LargeInput = ({
     } else if (error) {
       return "err-LargeInput-input"
     } else if (!error) {
-      return "LargeInput-input-correct" 
+      return "LargeInput-input-correct"
     }
   }
   return (
@@ -27,14 +27,15 @@ const LargeInput = ({
       <h2 className={error ? "err-LargeInput-header" : 'LargeInput-header'}>{name}</h2>
       <div className={` ${handleClass()}`}>
         <input
+          type="text"
           name={formDataName}
           onChange={handleChange}
           className="LargeInput-input"
           value={value}
         >
         </input>
-        {formData && !error ?<AiFillCheckCircle className='BsCheckCircle'/> : ""
-         }
+        {formData && !error ? <AiFillCheckCircle className='BsCheckCircle' /> : ""
+        }
       </div>
       <p className='LargeInput-note'> {error ? error : note} </p>
     </div>

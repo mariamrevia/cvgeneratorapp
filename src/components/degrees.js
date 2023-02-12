@@ -10,23 +10,39 @@ const Degrees = ({
     degreeSelected,
     setDegreeSelected,
     setIsActive,
-   
-
+    value,
+    setFormData,
+    name,
+    handleChange
 }) => {
 
 
-    const handleClick = (name, id) => {
+    const handleClick = (name) => {
         setDegreeSelected(name)
         setIsActive(false)
+
+        setFormData((prevValue) => {
+            return (
+                {
+                    ...prevValue,
+                    educations: prevValue.educations.map((edu) => {
+                        return { ...edu, degree: name }
+                    })
+                }
+            )
+        })
 
 
     }
     return (
         <div className='degree-div'>
             <h2 className='degree-hd'>ხარისხი</h2>
-            <div className='degree-dropdown'>
+            <div
+
+                className='degree-dropdown'>
 
                 <div
+                    onChange={handleChange}
                     onClick={(e) => {
                         setIsActive(!isActive)
 
@@ -41,17 +57,23 @@ const Degrees = ({
                     }
                 </div>
                 {isActive &&
-                    <div className='dropdown--content'>
+                    <div
+
+                        className='dropdown--content'>
                         {
-                            degrees.map((degree) => {
+                            degrees.map((degree, index) => {
                                 return (
                                     <div
+
+
+                                        name={name}
+                                        value={value}
                                         onClick={() => {
-                                            handleClick(degree.title, degree.id)
+                                            handleClick(degree.title, degree.id, index)
                                         }}
                                         className="dropdownItem"
-                                        key={degree.id}>
-                                        {degree.title} </div>
+                                        key={index}>
+                                        {degree.title}</div>
                                 )
                             })}
                     </div>}

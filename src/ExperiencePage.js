@@ -19,6 +19,9 @@ const ExperiencePage = () => {
   const { imageUploaded } = location.state || {}
 
   const [error, setError] = useState([])
+  
+
+
   const [formData, setFormData] = useState(
     {
       name: formDatas.name || "",
@@ -34,29 +37,34 @@ const ExperiencePage = () => {
         due_date: "",
         description: ""
       }],
-
+      
     }
-  )
-
- 
-
+    )
+    
+    
+    
+    useEffect(() => {
+      const experience = localStorage.getItem("expData")
+      console.log (experience)
+      if (experience) {
+        setFormData(JSON.parse(experience))
+      }
+    }, [])
 
 
   function handleChange(e, index) {
-    e.preventDefault()
     console.log(index, e.target.name)
     const { name, value } = e.target
-
+    
     const newExperience = [...formData.experience]
     newExperience[index][name] = value
-
-
     const newFormData = {
       ...formData,
       experience: newExperience
     }
+    e.preventDefault()
 
-    localStorage.setItem("formData", JSON.stringify(newFormData))
+    localStorage.setItem("expData", JSON.stringify(newFormData))
     const error = validate(newFormData)
     setFormData(newFormData)
     setError(error)
@@ -128,21 +136,15 @@ const ExperiencePage = () => {
     }
 
     console.log (error)
+   
     
     navigate("/Education", {
       state: {
-        formDatas: formData
+        formDatas: formData , imageUploaded 
       }
     })
 
   }
-  // useEffect(() => {
-  //   const experience = localStorage.getItem("formData")
-  //   console.log (experience)
-  //   if (experience) {
-  //     setFormData(JSON.parse(experience))
-  //   }
-  // }, [])
 
 
   return (
