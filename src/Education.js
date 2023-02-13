@@ -11,6 +11,7 @@ import Degrees from './components/degrees'
 const Education = () => {
     const [degrees, setDegrees] = useState([])
     const [error, setError] = useState([])
+    const [file , setFile] =useState ()
     const [degreeArray, setDegreeArray] = useState([])
 
     const navigate = useNavigate()
@@ -68,9 +69,14 @@ const Education = () => {
     }, [])
 
 
-    // const handleClick = () => {
-
-    // }
+    
+    useEffect (() => {
+        const degrees = localStorage.getItem("degree")
+        if(degrees) {
+            
+            setDegreeArray(JSON.parse(degrees))
+        } 
+    },[])
 
 
 
@@ -98,7 +104,7 @@ const Education = () => {
 
     })
 
-
+    
     const handleaddform = useCallback(() => {
         setFormData({
             ...formData,
@@ -115,6 +121,9 @@ const Education = () => {
 
 
     }, [formData])
+
+
+
 
     const handleDegree = (name, id, index) => {
         console.log(name, id, index, degreeArray)
@@ -133,20 +142,51 @@ const Education = () => {
         })
 
         console.log(formData)
+
+        localStorage.setItem ("degree", JSON.stringify(degreeArray))
     }
 
+    useEffect (() => {
+
+        let file = new File([imageUploaded], "name");
+        setFile (file)
+    },[imageUploaded])
+
+    
+    function dataURLtoFile(dataurl ) {
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), 
+            n = bstr.length, 
+            u8arr = new Uint8Array(n);
+            
+            while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        
+        return new File([u8arr], "filename", {type:mime});
+    }
+    let image = dataURLtoFile (imageUploaded)
+    console.log (image)
+
+
+  
     const handleSubmit = (e) => {
         e.preventDefault()
-        // const error = validate(formData)
-        // setError(error)
-        // if (Object.keys(error).length !== 0) {
-        //     return
-        // }
-
+        const error = validate(formData)
+        setError(error)
+        console.log (error)
+        if (Object.keys(error[0]).length !== 0) {
+            return
+          }
+       
+        console.log (file)
+        
         console.log("ffd")
         const Data = new FormData()
         Data.append("name", formData.name)
         Data.append("surname", formData.surname)
+        Data.append ("image", image)
         Data.append("email", formData.email)
         Data.append("phone_number", formData.phone_number.replace(/\s/g, ""))
         Data.append("about_me", formData.about_me)
@@ -159,7 +199,7 @@ const Education = () => {
         })
 
         formData.educations.forEach((edu, index) => {
-            Data.append(`educations[${index}][institute]`, edu.position)
+            Data.append(`educations[${index}][institute]`, edu.institute)
             Data.append(`educations[${index}][degree_id]`, edu.degree_id)
             Data.append(`educations[${index}][due_date]`, edu.due_date)
             Data.append(`educations[${index}][description]`, edu.description)
@@ -177,6 +217,10 @@ const Education = () => {
         .then((res) => res.json())
         .then((data) => console.log(data, "jjj"))
         .catch((error) => console.log(error))
+
+     
+        
+        navigate ("/cvpage")
 
     }
 
@@ -242,13 +286,11 @@ const Education = () => {
                                 <div className='date'>
                                     <Degrees
                                         formData={formData}
-                                        error={error[index] && error[index].degree}
+                                        error={error[index] && error[index].degree_id}
                                         name="degree_id"
                                         value={edu.degree}
                                         degrees={degrees}
-
                                         degreeTitle={degreeArray[index]}
-
                                         setFormData={setFormData}
                                         index={index}
                                         handleChange={handleDegree}

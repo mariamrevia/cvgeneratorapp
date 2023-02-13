@@ -58,7 +58,7 @@ const PersonalInfo = () => {
 
         localStorage.setItem("formData", JSON.stringify(newFormData))
         if (formData) {
-            const errors = validate(newFormData)
+            const errors = validate (newFormData , imageUploaded)
             setFormErrors(errors)
         }
         setFormData(newFormData)
@@ -69,9 +69,9 @@ const PersonalInfo = () => {
 
     const handleImage = (e) => {
 
-        e.preventDefault()
-        const { name } = e.target
-        console.log(name)
+        // e.preventDefault()
+        // const { name } = e.target
+        // console.log(name)
         const newImage = { ...formData, image: e.target.files[0] }
         setFormData(newImage)
         // setFormData((prevValues) => {
@@ -80,18 +80,19 @@ const PersonalInfo = () => {
         //         image: e.target.files[0]
         //     }
         // })
-        // const file = e.target.files[0];
-        // const reader = new FileReader();
+        const file = e.target.files[0];
+        const reader = new FileReader();
 
-        // reader.onloadend = () => {
-        //     setImageUploaded(reader.result)
-        // };
-        // reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setImageUploaded(reader.result)
+            localStorage.setItem("image", reader.result)
+        };
+        reader.readAsDataURL(file);
 
-        const img = e.target.files[0]
-        const image = URL.createObjectURL(img)
-        setImageUploaded(image)
-        localStorage.setItem("image", URL.createObjectURL(img))
+        // const img = e.target.files[0]
+        // const image = URL.createObjectURL(img)
+        // setImageUploaded(image)
+        // localStorage.setItem("image", URL.createObjectURL(img))
         console.log("jhgd", imageUploaded)
 
     }
@@ -101,7 +102,7 @@ const PersonalInfo = () => {
         e.preventDefault()
 
         setIsSubmit(true)
-        const errors = validate(formData)
+        const errors = validate(formData,imageUploaded)
         setFormErrors(errors)
         console.log(errors)
         if (Object.keys(errors).length !== 0) {
@@ -116,7 +117,7 @@ const PersonalInfo = () => {
     }
 
 
-    const validate = (data) => {
+    const validate = (data,image) => {
 
 
         const errors = {}
@@ -155,7 +156,7 @@ const PersonalInfo = () => {
             errors.phone_number = "არ აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"
         }
 
-        if (!data.image) {
+        if (!image) {
             errors.image = "ატვირთეთ ფოტო"
         }
 
@@ -196,7 +197,7 @@ const PersonalInfo = () => {
                                     onChange={handleImage}
                                     type="file"
                                     name='image'
-                                    multiple accept='image/png, image/jpeg , image/webp'
+                                    multiple accept='image/*'
                                     className='photo-upload-btn'
                                     error={formErrors.image}
 

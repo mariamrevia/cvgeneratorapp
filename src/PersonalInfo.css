@@ -146,15 +146,17 @@
 
 }
 
-.uploadedphoto[src*="http"]  {
+.uploadedphoto {
     border-radius: 50%;
-    display: block;
-    
+  
+    border: none;
+    outline: none;
 
     width: 246px;
     height: 246px;
     margin-top: 48px;
     object-fit: cover;
+    background-color: white;
 
 
 }

@@ -4,6 +4,7 @@ import HomePage from './HomePage';
 import PersonalInfo from './PersonalInfo';
 import ExperiencePage from './ExperiencePage';
 import Education from './Education';
+import Cvpage from './cvpage';
 import { Routes, Route, Navigate } from "react-router-dom"
 
 
@@ -20,6 +21,7 @@ function App() {
       <Route path="/personalInfo" element={<PersonalInfo/>} />  
       <Route path='/experiencePage' element={<ExperiencePage/>} />
       <Route path='/Education' element={<Education/>}/>
+      <Route path="/cvpage" element={<Cvpage/>}/>
 
   </Routes>
       
