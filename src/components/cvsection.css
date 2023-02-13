@@ -4,6 +4,7 @@
     height:  1080px;
     justify-content: space-between;
     margin: auto;
+    inline-size: 662px;
 }
 .cv-div {
     display: flex;
@@ -102,9 +103,9 @@
 }
 
 .cv-aboutme-text {
-    display: flex;
+  
     margin-top: 15px;
-    inline-size: 300px;
+    inline-size: 662px;
     
 
 }
@@ -181,7 +182,8 @@ margin-top: 24px;
 .cv-description {
 
     font-family:  HelveticaNeue;
-    display: flex;
+    width: 500px;
+    
     margin-top: 16px;
     font-style: normal;
     font-weight: 400;
@@ -191,5 +193,12 @@ margin-top: 24px;
     color: #000000;
     inline-size: 662px;
     word-wrap: break-word;
+    
+  
 
+}
+.cv-description--div {
+    inline-size: 500px;
+    word-wrap: break-word;
+    width: 662px;
 }

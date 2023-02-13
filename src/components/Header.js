@@ -1,16 +1,29 @@
 import React from 'react'
 import {BsChevronLeft} from "react-icons/bs"
+import { useNavigate } from 'react-router-dom'
+
 
 const Header = ({
     name
 }) => {
+
+ 
+  const handlegoingmainpage =  () => {
+    navigate("/")
+    localStorage.clear()
+     
+  }
+  const navigate = useNavigate ()
   return (
     <div>
          <header>
           <div className='header--div'>
             <div>
               <button 
-                className='back-btn'>
+                className='back-btn'
+                onClick = {handlegoingmainpage}>
+             
+
                 <BsChevronLeft
                 className='backicon'
               /></button>

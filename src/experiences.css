@@ -57,92 +57,44 @@
 }
 
 /*  data */
-.start-data-input {
-    color: rgba(0, 0, 0, 0.6);
-    width: 371px;
-    height: 48px;
-    background: #FFFFFF;
-    border: 1px solid #BCBCBC;
-    border-radius: 4px;
-    margin-top: 8px;
-}
 
-
-.end-data-input {
-
-    width: 371px;
-    height: 48px;
-    background: #FFFFFF;
-    border: 1px solid #BCBCBC;
-    border-radius: 4px;
-    margin-top: 8px;
-}
-
-.dates {
-    display: flex;
-    flex-direction: row;
-    width: 798px;
-    justify-content: space-between;
-}
-
-.data--div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    margin-top: 20px
-}
-
-.startDate {
-    width: 371px;
-    height: 21px;
-    font-family: HelveticaNeue;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 21px;
-    display: flex;
-    color: #000000;
-
-}
-
-.endDate {
-    width: 371px;
-    height: 21px;
-    font-family: HelveticaNeue;
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 21px;
-    display: flex;
-    color: #000000;
-
-}
 
 /* ------------------------------- */
 
 /* description */
 .Description-input {
+    display: flex;
     width: 798px;
     height: 123px;
+  
     resize: vertical;
     word-wrap: break-word;
-
+    justify-content: center;
     background: #FFFFFF;
     border: 1px solid #BCBCBC;
     border-radius: 4px;
    
 }
+ .Description-input:focus {
+    outline: none;
+ }
 
-/* .Description-input {
+.Description-input--corr {
+    border: 1px solid #98E37E;
+    display: flex;
     width: 798px;
+    height: 123px;
     resize: vertical;
-  
-    background: #FFFFFF;
-    border: 1px solid #BCBCBC;
-    border-radius: 4px;
     word-wrap: break-word;
-  } */
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 4px;
+  }
+
+  .Description-input--corr {
+    outline: none;
+  }
+
 .Description-div {
     display: flex;
     flex-direction: column;
@@ -162,6 +114,21 @@
     align-items: center;
     color: #000000;
     margin-bottom: 8px;
+}
+.Description-h2--err {
+    width: 798px;
+    height: 21px;
+
+    font-family: HelveticaNeue;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color:#E52F2F;
+    margin-bottom: 8px;
+
 }
 
 /* ---------------- */

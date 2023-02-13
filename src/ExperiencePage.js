@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import LargeInput from './components/LargeInput'
 import Header from './components/Header'
 import Cvsection from './components/cvsection'
-import "./experience.css"
+import "./experiences.css"
 import Dates from './components/dates'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -19,7 +19,8 @@ const ExperiencePage = () => {
   const { imageUploaded } = location.state || {}
 
   const [error, setError] = useState([])
-  
+
+
 
 
   const [formData, setFormData] = useState(
@@ -30,44 +31,46 @@ const ExperiencePage = () => {
       phone_number: formDatas.phone_number || "",
       image: formDatas.image || "",
       about_me: formDatas.about_me || "",
-      experience: [{
+      experiences: [{
         position: "",
         employer: "",
         start_date: "",
         due_date: "",
         description: ""
       }],
-      
+
     }
-    )
-    
-    
-    
-    useEffect(() => {
-      const experience = localStorage.getItem("expData")
-      console.log (experience)
-      if (experience) {
-        setFormData(JSON.parse(experience))
-      }
-    }, [])
+  )
+
+
+
+  useEffect(() => {
+    const experiences = localStorage.getItem("expData")
+    console.log(experiences)
+    if (experiences) {
+      setFormData(JSON.parse(experiences))
+    }
+  }, [])
 
 
   function handleChange(e, index) {
     console.log(index, e.target.name)
     const { name, value } = e.target
-    
-    const newExperience = [...formData.experience]
+
+    const newExperience = [...formData.experiences]
     newExperience[index][name] = value
     const newFormData = {
       ...formData,
-      experience: newExperience
+      experiences: newExperience
     }
     e.preventDefault()
 
     localStorage.setItem("expData", JSON.stringify(newFormData))
+
     const error = validate(newFormData)
     setFormData(newFormData)
     setError(error)
+
     console.log(error)
 
 
@@ -78,8 +81,8 @@ const ExperiencePage = () => {
     console.log("sgsgsg")
     setFormData({
       ...formData,
-      experience: [
-        ...formData.experience, {
+      experiences: [
+        ...formData.experiences, {
           position: "",
           employer: "",
           start_date: "",
@@ -94,15 +97,15 @@ const ExperiencePage = () => {
   const validate = (data) => {
 
     let formError = []
-    data.experience.forEach((exp, index) => {
+    data.experiences.forEach((exp, index) => {
       const errors = {}
 
       if (!exp.position) {
         errors.position = "აუცილებელია შეავსოთ ველი"
-
       } else if (exp.position.length < 2) {
         errors.position = "აუცილებელია მინიმუმ 2 სიმბოლო"
       }
+
       if (!exp.employer) {
         errors.employer = "აუცილებელია შეავსოთ ველი"
       } else if (exp.employer.length < 2) {
@@ -135,12 +138,12 @@ const ExperiencePage = () => {
       return
     }
 
-    console.log (error)
-   
-    
+    console.log(error)
+
+
     navigate("/Education", {
       state: {
-        formDatas: formData , imageUploaded 
+        formDatas: formData, imageUploaded
       }
     })
 
@@ -155,12 +158,13 @@ const ExperiencePage = () => {
         />
 
         <form onSubmit={handleSubmit}>
-          {formData && formData.experience.map((experience, index) => {
+          {formData && formData.experiences.map((experience, index) => {
             return (
               <div key={index} className='exp-section-div'>
 
                 <LargeInput
                   formDataName="position"
+                  formData={experience.position}
                   name="თანამდებობა"
                   note="მინიმუმ 2 სიმბოლო"
                   handleChange={(e) => handleChange(e, index)}
@@ -170,6 +174,7 @@ const ExperiencePage = () => {
                 />
                 <LargeInput
                   formDataName="employer"
+                  formData={experience.employer}
                   name="დამსაქმებელი"
                   note="მინიმუმ 2 სიმბოლო"
                   handleChange={(e) => handleChange(e, index)}
@@ -179,13 +184,17 @@ const ExperiencePage = () => {
 
                 <div className='dates'>
                   <Dates
-                    name="start_date"
+                    formData={formData.experiences.start_date}
+                    formDataName="start_date"
+                    name="დაწყები თარიღი"
                     handleChange={(e) => handleChange(e, index)}
                     value={experience.start_date}
                     error={error[index] && error[index].start_date}
                   />
                   <Dates
-                    name="due_date"
+                    formData={formData.experiences.due_date}
+                    formDataName="due_date"
+                    name="დამთავრების თარიღი"
                     handleChange={(e) => handleChange(e, index)}
                     value={experience.due_date}
                     error={error[index] && error[index].due_date}
@@ -193,16 +202,18 @@ const ExperiencePage = () => {
                 </div>
 
                 <div className='Description-div'>
-                  <h2 className='Description-h2'>აღწერა</h2>
-                  <input
+                  <h2 className={error[index] && error[index].description ? 'Description-h2--err':"Description-h2"}
+                  
+                  >აღწერა</h2>
+                  <textarea
                     type="text"
                     placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
-                    className='Description-input'
+                    className={error[index] && !error[index].description ? "Description-input--corr":'Description-input'}
                     name="description"
                     value={experience.description}
                     onChange={(e) => handleChange(e, index)}
                     error={error[index] && error[index].description}
-                  ></input>
+                  />
 
                 </div>
                 <hr className='hr-2'></hr>
@@ -218,17 +229,17 @@ const ExperiencePage = () => {
               onClick={() => handleClick()}
               className='add-btn'>მეტი გამოცდილების დამატება</button>
           </div>
-        <div className='btn-section'>
-          <div className='button-section-div'>
-            <button
-              type='button'
-              onClick={() => navigate("/personalInfo")}
-              className='back-button'>უკან</button>
-            <button 
-            
-            className='next--button'>შემდეგი</button>
+          <div className='btn-section'>
+            <div className='button-section-div'>
+              <button
+                type='button'
+                onClick={() => navigate("/personalInfo")}
+                className='back-button'>უკან</button>
+              <button
+
+                className='next--button'>შემდეგი</button>
+            </div>
           </div>
-        </div>
         </form>
       </section>
 

@@ -16,9 +16,11 @@ const LargeInput = ({
   function handleClass() {
     if (!formData) {
       return "LargeInput-input-div"
-    } else if (error) {
+    } 
+    
+    if (error) {
       return "err-LargeInput-input"
-    } else if (!error) {
+    } else  if (!error) {
       return "LargeInput-input-correct"
     }
   }

@@ -11,9 +11,10 @@ const Cvsection = ({
     phone_number,
     about_me,
     imageUploaded,
-    formData1
-    
-    
+    formData1,
+    formData2
+
+
 }) => {
 
     return (
@@ -41,17 +42,19 @@ const Cvsection = ({
                         </div>
                     }
                     <div>
+{formData1?
 
-                        <hr className='cv-hr'></hr>
-                        
-                              {
-                                formData1 && 
-                               
-                                <h2 className='cv-experience-hd'>გამოცდილება</h2> 
-                              }
+                        <hr className='cv-hr'></hr>:""
+}
 
                         {
-                            formData1 && formData1.experience.map((exp,index) => {
+                            formData1 &&
+
+                            <h2 className='cv-experience-hd'>გამოცდილება</h2>
+                        }
+
+                        {
+                            formData1 && formData1.experiences.map((exp, index) => {
                                 return (
 
                                     <div key={index} className='cv-experience-div'>
@@ -64,13 +67,49 @@ const Cvsection = ({
                                             <span className='cv-start-date'>{exp.start_date}</span>
                                             <span className='cv-due-date'>{exp.due_date}</span>
                                         </div>
-                                        <div>
-                                            <p className='cv-description'>{exp.description}</p>
+                                        <div className='cv-description--div'>
+                                            <span className='cv-description'>{exp.description}</span>
                                         </div>
                                     </div>
                                 )
                             })
                         }
+                    </div>
+                    <div>
+                        {formData2 ?
+                            <hr className='cv-hr'></hr> : ""}
+                        {
+
+                            formData2 ?
+                                <h2 className='cv-experience-hd'>განათლება</h2> :""
+                        }
+
+
+                        {
+                            formData2 && formData2.educations.map((edu, index) => {
+                                return (
+                                    <div key={index} className='cv-experience-div'>
+                                        <div className='cv-posempl-div'>
+                                            <h3 className='cv-position'>{edu.institute}</h3>
+                                            <h2 className="cv-employer">{edu.degree}</h2>
+                                        </div>
+                                        <div className='cv-date-diiv'>
+                                            <p className='cv-due-date'>{edu.due_date}</p>
+                                        </div>
+                                        <div className='cv-description--div'>
+                                            <p className='cv-description'>{edu.description}</p>
+                                        </div>
+
+
+
+
+                                    </div>
+                                )
+
+                            })
+                        }
+
+
                     </div>
                 </div>
                 <div>

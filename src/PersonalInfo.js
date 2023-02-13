@@ -42,7 +42,7 @@ const PersonalInfo = () => {
 
 
     useEffect(() => {
-        const image = JSON.parse(localStorage.getItem("image"))
+        const image = localStorage.getItem("image")
         if (image) {
             setImageUploaded(image)
         }
@@ -55,7 +55,7 @@ const PersonalInfo = () => {
         const { name, value } = e.target
         const newFormData = { ...formData, [name]: value }
 
-        
+
         localStorage.setItem("formData", JSON.stringify(newFormData))
         if (formData) {
             const errors = validate(newFormData)
@@ -68,21 +68,31 @@ const PersonalInfo = () => {
     }
 
     const handleImage = (e) => {
+
         e.preventDefault()
-        // const { image } = e.target
-        // const newImage = { ...formData, [image]: e.target.files[0] }
-        // setFormData(newImage)
+        const { name } = e.target
+        console.log(name)
+        const newImage = { ...formData, image: e.target.files[0] }
+        setFormData(newImage)
+        // setFormData((prevValues) => {
+        //     return {
+        //         ...prevValues,
+        //         image: e.target.files[0]
+        //     }
+        // })
+        // const file = e.target.files[0];
+        // const reader = new FileReader();
 
-        setFormData((prevValues) => {
-            return {
-                ...prevValues,
-                image: e.target.files[0]
-            }
-        })
+        // reader.onloadend = () => {
+        //     setImageUploaded(reader.result)
+        // };
+        // reader.readAsDataURL(file);
 
-        setImageUploaded(URL.createObjectURL(e.target.files[0]))
-        localStorage.setItem("image", JSON.stringify(imageUploaded))
-        console.log(imageUploaded)
+        const img = e.target.files[0]
+        const image = URL.createObjectURL(img)
+        setImageUploaded(image)
+        localStorage.setItem("image", URL.createObjectURL(img))
+        console.log("jhgd", imageUploaded)
 
     }
 
@@ -181,6 +191,7 @@ const PersonalInfo = () => {
                         <div className='photo--div'>
                             <h1 className='photo-note'>პირადი ფოტოს ატვირთვა</h1>
                             <label className='photo--label'>
+
                                 <input
                                     onChange={handleImage}
                                     type="file"
@@ -192,8 +203,8 @@ const PersonalInfo = () => {
                                 />
                                 ატვირთვა
                             </label>
-                          
-                            {formErrors.image?
+
+                            {formErrors.image ?
                                 <BsFillExclamationTriangleFill
                                     className='Exclamation-icon-err' /> : !formData.image ? "" :
                                     <AiFillCheckCircle className="BsCheckCircle-img" />}
@@ -201,13 +212,13 @@ const PersonalInfo = () => {
 
                         <div className='about-div'>
                             <h2 className='aboutme-header'>ჩემ შესახებ (არასავალდებულო)</h2>
-                            <input
+                            <textarea
                                 name='about_me'
                                 onChange={handleChange}
                                 className='about-input'
                                 value={formData.about_me}
-                                ></input>
-                              
+                            />
+
                         </div>
 
                         <LargeInput
@@ -219,7 +230,7 @@ const PersonalInfo = () => {
                             formData={formData.email}
                             value={formData.email}
                         />
-                        
+
                         <LargeInput
                             name="მობილურის ნომერი"
                             note="უნდა აკმაყოფილებდეს ქართული მობილურის ნომრის ფორმატს"

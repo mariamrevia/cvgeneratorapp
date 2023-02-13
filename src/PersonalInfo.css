@@ -146,8 +146,10 @@
 
 }
 
-.uploadedphoto {
+.uploadedphoto[src*="http"]  {
     border-radius: 50%;
+    display: block;
+    
 
     width: 246px;
     height: 246px;
@@ -156,6 +158,9 @@
 
 
 }
+/* img {
+    display: none;
+} */
 
 
 /*  */
@@ -192,6 +197,9 @@
     border: 1px solid #BCBCBC;
     border-radius: 4px;
     margin-top: 8px;
+}
+.about-input:focus {
+    outline: none;
 }
 
 .next-btn {

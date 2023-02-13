@@ -66,7 +66,7 @@ const Smallinputs = ({
                     {formData2 && !error2 ? <AiFillCheckCircle className='BsCheckCircle' /> : ""
                     }
                 </div>
-                <p className='input-note'>{error2 ? error1 : note}</p>
+                <p className='input-note'>{error2 ? error2 : note}</p>
 
             </div>
 

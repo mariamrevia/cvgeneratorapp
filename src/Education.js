@@ -10,10 +10,10 @@ import Degrees from './components/degrees'
 
 const Education = () => {
     const [degrees, setDegrees] = useState([])
-    const [degreeSelected, setDegreeSelected] = useState("")
-    const [isActive, setIsActive] = useState(false)
+    const [error, setError] = useState([])
+    const [degreeArray, setDegreeArray] = useState([])
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
     const location = useLocation()
     const { formDatas = {} } = location.state || {}
     const { imageUploaded } = location.state || {}
@@ -28,11 +28,11 @@ const Education = () => {
 
             educations: [{
                 institute: "",
-                degree: "",
+                degree_id: "",
                 due_date: "",
                 description: "",
             }],
-            experience: formDatas.experience ? formDatas.experience.map(exp => ({
+            experiences: formDatas.experiences ? formDatas.experiences.map(exp => ({
                 position: exp.position,
                 employer: exp.employer,
                 start_date: exp.start_date,
@@ -67,13 +67,14 @@ const Education = () => {
 
     }, [])
 
-    console.log(formData)
+
     // const handleClick = () => {
 
     // }
 
 
-    const handleChange = useCallback((e, index) => {
+
+    const handleChange = ((e, index) => {
         e.preventDefault()
         const { name, value } = e.target
         const newEducation = [...formData.educations]
@@ -87,7 +88,15 @@ const Education = () => {
         setFormData(newFormData)
         localStorage.setItem("eduData", JSON.stringify(newFormData))
 
-    }, [formData])
+        const error = validate(formData)
+        setError(error)
+
+        console.log(error)
+        console.log(formData)
+
+        // console.log(formData)
+
+    })
 
 
     const handleaddform = useCallback(() => {
@@ -96,7 +105,7 @@ const Education = () => {
             educations: [
                 ...formData.educations, {
                     institute: "",
-                    degree: "",
+                    degree_id: "",
                     due_date: "",
                     description: "",
 
@@ -107,6 +116,107 @@ const Education = () => {
 
     }, [formData])
 
+    const handleDegree = (name, id, index) => {
+        console.log(name, id, index, degreeArray)
+        degreeArray[index] = name
+        setDegreeArray(degreeArray)
+        console.log(degreeArray[index])
+        const newFormData = [...formData.educations]
+        newFormData[index]["degree_id"] = id
+        setFormData((prevValue) => {
+            return (
+                {
+                    ...prevValue,
+                    educations: newFormData
+                }
+            )
+        })
+
+        console.log(formData)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // const error = validate(formData)
+        // setError(error)
+        // if (Object.keys(error).length !== 0) {
+        //     return
+        // }
+
+        console.log("ffd")
+        const Data = new FormData()
+        Data.append("name", formData.name)
+        Data.append("surname", formData.surname)
+        Data.append("email", formData.email)
+        Data.append("phone_number", formData.phone_number.replace(/\s/g, ""))
+        Data.append("about_me", formData.about_me)
+        formData.experiences.forEach((exp, index) => {
+            Data.append(`experiences[${index}][position]`, exp.position)
+            Data.append(`experiences[${index}][employer]`, exp.employer)
+            Data.append(`experiences[${index}][start_date]`, exp.start_date)
+            Data.append(`experiences[${index}][due_date]`, exp.due_date)
+            Data.append(`experiences[${index}][description]`, exp.description)
+        })
+
+        formData.educations.forEach((edu, index) => {
+            Data.append(`educations[${index}][institute]`, edu.position)
+            Data.append(`educations[${index}][degree_id]`, edu.degree_id)
+            Data.append(`educations[${index}][due_date]`, edu.due_date)
+            Data.append(`educations[${index}][description]`, edu.description)
+        })
+
+       
+        fetch("https://resume.redberryinternship.ge/api/cvs", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+
+            },
+            body: Data
+        })
+        .then((res) => res.json())
+        .then((data) => console.log(data, "jjj"))
+        .catch((error) => console.log(error))
+
+    }
+
+
+    const validate = (data) => {
+
+        let formErrors = []
+        data.educations.forEach((edu, index) => {
+            const errors = {}
+
+            if (!edu.institute) {
+                errors.institute = "აუცილებელია შეავსოთ ველი"
+
+            } else if (edu.institute.length < 2) {
+                errors.institute = "აუცილებელია მინიმუმ 2 სიმბოლო"
+            }
+
+            if (!edu.degree_id) {
+                errors.degree_id = "აუცილებელია შეავსოთ ველი"
+
+            }
+            if (!edu.due_date) {
+                errors.due_date = "აუცილებელია შეავსოთ ველი"
+            }
+            if (!edu.description) {
+                errors.description = "აუცილებელია შეავსოთ ველი"
+            }
+            formErrors[index] = errors
+            console.log(formErrors)
+
+        }
+
+        )
+
+        return formErrors
+
+    }
+
+
+
     return (
 
         <div className='Main--div'>
@@ -114,16 +224,17 @@ const Education = () => {
                 <Header
                     name="განათლება"
                 />
-                <form>
+                <form onSubmit={handleSubmit}>
                     {formData && formData.educations.map((edu, index) => {
                         return (
                             <div key={index} className="edu-section-div">
                                 <LargeInput
-
+                                    formData={edu.institute}
                                     formDataName="institute"
                                     name="სასწავლებელი"
                                     note="მინიმუმ 2 სიმბოლო"
                                     value={edu.institute}
+                                    error={error[index] && error[index].institute}
                                     handleChange={(e) => handleChange(e, index)}
 
                                 />
@@ -131,30 +242,35 @@ const Education = () => {
                                 <div className='date'>
                                     <Degrees
                                         formData={formData}
-                                        name="degree"
+                                        error={error[index] && error[index].degree}
+                                        name="degree_id"
                                         value={edu.degree}
                                         degrees={degrees}
-                                        degreeSelected={degreeSelected}
-                                        isActive={isActive}
-                                        setIsActive={setIsActive}
-                                        setDegreeSelected={setDegreeSelected}
+
+                                        degreeTitle={degreeArray[index]}
+
                                         setFormData={setFormData}
-                                        handleChange={(e) => handleChange(e, index)}
+                                        index={index}
+                                        handleChange={handleDegree}
+                                        degreeArray={degreeArray}
+                                        setDegreeArray={setDegreeArray}
                                     />
                                     <Dates
                                         value={edu.due_date}
                                         name="დამთავრების რიცხვი"
+                                        formDataName="due_date"
                                         handleChange={(e) => handleChange(e, index)}
+                                        error={error[index] && error[index].due_date}
                                     />
 
                                 </div>
                                 <div
                                     className='description-edu-div'>
                                     <h2
-                                        className='description-hd-edu'>აღწერა</h2>
+                                        className={error[index] && error[index].description ? "description-hd-edu-err  " : 'description-hd-edu'}>აღწერა</h2>
                                     <textarea
                                         name="description"
-                                        className='description-edu'
+                                        className={error[index] && !error[index].description ? "description-edu--corr" : 'description-edu'}
                                         onChange={(e) => handleChange(e, index)}
                                         value={edu.description}
                                     />
@@ -172,6 +288,20 @@ const Education = () => {
                             className='add-btn'>მეტი გამოცდილების დამატება</button>
                     </div>
 
+                    <div className='btn-section-edu'>
+                        <div className='button-section-div'>
+                            <button
+                                type='button'
+                                onClick={() => navigate("/experiencePage")}
+                                className='back-button'>უკან</button>
+                            <button
+                                type='submit'
+                                className='next--button'>შემდეგი</button>
+                        </div>
+                    </div>
+
+
+
                 </form>
             </section>
             <section className='cv-section'>
@@ -183,8 +313,7 @@ const Education = () => {
                     about_me={formData.about_me}
                     imageUploaded={imageUploaded}
                     formData1={formData}
-
-
+                    formData2={formData}
 
                 />
 
