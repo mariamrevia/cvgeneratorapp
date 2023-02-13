@@ -8,11 +8,13 @@ import Header from './components/Header'
 import "./education.css"
 import Degrees from './components/degrees'
 
+
 const Education = () => {
     const [degrees, setDegrees] = useState([])
     const [error, setError] = useState([])
-    const [file , setFile] =useState ()
+    const [file, setFile] = useState()
     const [degreeArray, setDegreeArray] = useState([])
+    const [cv, setCV] = useState({})
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -69,14 +71,14 @@ const Education = () => {
     }, [])
 
 
-    
-    useEffect (() => {
+
+    useEffect(() => {
         const degrees = localStorage.getItem("degree")
-        if(degrees) {
-            
+        if (degrees) {
+
             setDegreeArray(JSON.parse(degrees))
-        } 
-    },[])
+        }
+    }, [])
 
 
 
@@ -104,7 +106,7 @@ const Education = () => {
 
     })
 
-    
+
     const handleaddform = useCallback(() => {
         setFormData({
             ...formData,
@@ -143,50 +145,50 @@ const Education = () => {
 
         console.log(formData)
 
-        localStorage.setItem ("degree", JSON.stringify(degreeArray))
+        localStorage.setItem("degree", JSON.stringify(degreeArray))
     }
 
-    useEffect (() => {
+    useEffect(() => {
 
         let file = new File([imageUploaded], "name");
-        setFile (file)
-    },[imageUploaded])
+        setFile(file)
+    }, [imageUploaded])
 
-    
-    function dataURLtoFile(dataurl ) {
+
+    function dataURLtoFile(dataurl) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), 
-            n = bstr.length, 
+            bstr = atob(arr[1]),
+            n = bstr.length,
             u8arr = new Uint8Array(n);
-            
-            while(n--){
+
+        while (n--) {
             u8arr[n] = bstr.charCodeAt(n);
         }
-        
-        return new File([u8arr], "filename", {type:mime});
+
+        return new File([u8arr], "filename", { type: mime });
     }
-    let image = dataURLtoFile (imageUploaded)
-    console.log (image)
+    let image = dataURLtoFile(imageUploaded)
+    console.log(image)
 
 
-  
+
     const handleSubmit = (e) => {
         e.preventDefault()
         const error = validate(formData)
         setError(error)
-        console.log (error)
+        console.log(error)
         if (Object.keys(error[0]).length !== 0) {
             return
-          }
-       
-        console.log (file)
-        
+        }
+
+        console.log(file)
+
         console.log("ffd")
         const Data = new FormData()
         Data.append("name", formData.name)
         Data.append("surname", formData.surname)
-        Data.append ("image", image)
+        Data.append("image", image)
         Data.append("email", formData.email)
         Data.append("phone_number", formData.phone_number.replace(/\s/g, ""))
         Data.append("about_me", formData.about_me)
@@ -205,7 +207,7 @@ const Education = () => {
             Data.append(`educations[${index}][description]`, edu.description)
         })
 
-       
+
         fetch("https://resume.redberryinternship.ge/api/cvs", {
             method: "POST",
             headers: {
@@ -214,15 +216,26 @@ const Education = () => {
             },
             body: Data
         })
-        .then((res) => res.json())
-        .then((data) => console.log(data, "jjj"))
-        .catch((error) => console.log(error))
-
-     
-        
-        navigate ("/cvpage")
+            .then((res) => res.json())
+            .then((data) => setCV(data))
+            .catch((error) => console.log(error))
+            console.log(cv)
 
     }
+
+    useEffect (() => {
+        if(Object.keys(cv).length !== 0) {
+
+            navigate("/cvpage" ,{
+            
+                state: {
+                    cv
+                }
+            })
+            localStorage.clear ()
+        }
+    },[cv , navigate])
+
 
 
     const validate = (data) => {

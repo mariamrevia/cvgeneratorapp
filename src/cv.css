@@ -1,0 +1,43 @@
+.cv--div {
+    display: flex;
+    min-height: 100vh;
+
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+}
+
+.cv--main-div {
+    position: relative;
+    display: flex;
+    width: 822px;
+    height: 1080px;
+    justify-content: space-between;
+    margin: auto;
+    border: 0.8px solid #000000;
+
+
+
+
+}
+
+.cv-section--1 {
+    display: flex;
+    flex-direction: column;
+    inline-size: 300px;
+    margin-left: 80px;
+
+}
+
+.cv--img {
+    display: flex;
+    margin-right: 80px;
+}
+
+.Logo--cv {
+    position: absolute;
+    bottom: 44px;
+    left: 78px;
+
+}

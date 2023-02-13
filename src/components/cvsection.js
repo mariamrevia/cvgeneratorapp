@@ -42,10 +42,10 @@ const Cvsection = ({
                         </div>
                     }
                     <div>
-{formData1?
+                        {formData1 ?
 
-                        <hr className='cv-hr'></hr>:""
-}
+                            <hr className='cv-hr'></hr> : ""
+                        }
 
                         {
                             formData1 &&
@@ -81,7 +81,7 @@ const Cvsection = ({
                         {
 
                             formData2 ?
-                                <h2 className='cv-experience-hd'>განათლება</h2> :""
+                                <h2 className='cv-experience-hd'>განათლება</h2> : ""
                         }
 
 
@@ -99,10 +99,6 @@ const Cvsection = ({
                                         <div className='cv-description--div'>
                                             <p className='cv-description'>{edu.description}</p>
                                         </div>
-
-
-
-
                                     </div>
                                 )
 
@@ -112,7 +108,7 @@ const Cvsection = ({
 
                     </div>
                 </div>
-                <div>
+                <div >
                     <img className="uploadedphoto" src={imageUploaded} alt=""></img>
                 </div>
 
