@@ -58,7 +58,7 @@ const PersonalInfo = () => {
 
         localStorage.setItem("formData", JSON.stringify(newFormData))
         if (formData) {
-            const errors = validate (newFormData , imageUploaded)
+            const errors = validate(newFormData, imageUploaded)
             setFormErrors(errors)
         }
         setFormData(newFormData)
@@ -69,17 +69,10 @@ const PersonalInfo = () => {
 
     const handleImage = (e) => {
 
-        // e.preventDefault()
-        // const { name } = e.target
-        // console.log(name)
+
         const newImage = { ...formData, image: e.target.files[0] }
         setFormData(newImage)
-        // setFormData((prevValues) => {
-        //     return {
-        //         ...prevValues,
-        //         image: e.target.files[0]
-        //     }
-        // })
+
         const file = e.target.files[0];
         const reader = new FileReader();
 
@@ -89,10 +82,7 @@ const PersonalInfo = () => {
         };
         reader.readAsDataURL(file);
 
-        // const img = e.target.files[0]
-        // const image = URL.createObjectURL(img)
-        // setImageUploaded(image)
-        // localStorage.setItem("image", URL.createObjectURL(img))
+
         console.log("jhgd", imageUploaded)
 
     }
@@ -102,7 +92,7 @@ const PersonalInfo = () => {
         e.preventDefault()
 
         setIsSubmit(true)
-        const errors = validate(formData,imageUploaded)
+        const errors = validate(formData, imageUploaded)
         setFormErrors(errors)
         console.log(errors)
         if (Object.keys(errors).length !== 0) {
@@ -117,7 +107,7 @@ const PersonalInfo = () => {
     }
 
 
-    const validate = (data,image) => {
+    const validate = (data, image) => {
 
 
         const errors = {}
@@ -243,6 +233,17 @@ const PersonalInfo = () => {
                         />
                     </div>
                     <button className='next-btn'>შემდეგი</button>
+                    {
+                        formErrors.email ? <BsFillExclamationTriangleFill
+                            className='Exclamation-icon-err-1' /> : ""
+
+                    }
+                    {
+                        formErrors.phone_number ? <BsFillExclamationTriangleFill
+                            className='Exclamation-icon-err-2' /> : ""
+
+                    }
+
                 </section>
                 {/* /* ---------------------------cv-section------------------------------------- */}
                 <section className='cv-section'>

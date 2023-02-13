@@ -105,8 +105,9 @@
 .cv-aboutme-text {
   
     margin-top: 15px;
-    inline-size: 662px;
-    
+    inline-size: 300px;
+    word-wrap: break-word;
+
 
 }
 

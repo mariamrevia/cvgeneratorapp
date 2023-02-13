@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import Header from './components/Header'
 import "./education.css"
 import Degrees from './components/degrees'
+import { BsFillExclamationTriangleFill } from "react-icons/bs"
 
 
 const Education = () => {
@@ -219,22 +220,22 @@ const Education = () => {
             .then((res) => res.json())
             .then((data) => setCV(data))
             .catch((error) => console.log(error))
-            console.log(cv)
+        console.log(cv)
 
     }
 
-    useEffect (() => {
-        if(Object.keys(cv).length !== 0) {
+    useEffect(() => {
+        if (Object.keys(cv).length !== 0) {
 
-            navigate("/cvpage" ,{
-            
+            navigate("/cvpage", {
+
                 state: {
                     cv
                 }
             })
-            localStorage.clear ()
+            localStorage.clear()
         }
-    },[cv , navigate])
+    }, [cv, navigate])
 
 
 
@@ -295,7 +296,12 @@ const Education = () => {
                                     handleChange={(e) => handleChange(e, index)}
 
                                 />
+                                {
+                                    error[index] && error[index].institute? <BsFillExclamationTriangleFill
+                                        className='Exclamation-icon-err-edu' /> : ""
 
+                                }
+                               
                                 <div className='date'>
                                     <Degrees
                                         formData={formData}
@@ -335,6 +341,7 @@ const Education = () => {
                             </div>
                         )
                     })}
+
                     <div
                         className='btn--section--div'>
                         <button

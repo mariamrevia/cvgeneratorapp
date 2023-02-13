@@ -10,6 +10,7 @@
 
 .info-section {
     display: flex;
+    position: relative;
     flex-direction: column;
     width: 1098px;
     min-height: 100vh;
@@ -148,7 +149,7 @@
 
 .uploadedphoto {
     border-radius: 50%;
-  
+
     border: none;
     outline: none;
 
@@ -160,6 +161,7 @@
 
 
 }
+
 /* img {
     display: none;
 } */
@@ -200,6 +202,7 @@
     border-radius: 4px;
     margin-top: 8px;
 }
+
 .about-input:focus {
     outline: none;
 }
@@ -240,4 +243,19 @@
     align-self: center;
     margin-left: 13.5px;
     color: #F93B1D;
+}
+
+
+.Exclamation-icon-err-1 {
+    color: #F93B1D;
+    position: absolute;
+    top: 609px;
+    right: 115px;
+}
+
+.Exclamation-icon-err-2 {
+    color: #F93B1D;
+    position: absolute;
+    top: 760px;
+    right: 115px;
 }

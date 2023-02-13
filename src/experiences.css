@@ -9,6 +9,7 @@
 
 .exp-section-div {
     display: flex;
+    position: relative;
     flex-direction: column;
     margin-top: 52px;
     align-items: center;
@@ -237,4 +238,19 @@
 
 .next--button:focus {
     background: #512FAF;
+}
+
+.Exclamation-icon-err-pos {
+    color: #F93B1D;
+    position: absolute;
+    top: 70px;
+    right: 115px;
+}
+
+.Exclamation-icon-err-emp {
+    color: #F93B1D;
+    position: absolute;
+    top: 218px;
+    right: 115px;
+
 }

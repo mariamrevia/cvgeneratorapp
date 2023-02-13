@@ -1,20 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import logo1 from "./images/Logo-1.png"
 import emailicon from "./images/Vector.png"
 import { BsTelephoneFill } from "react-icons/bs"
 import "./cv.css"
+import congrats from "./images/congrats.png"
+import vector from "./images/Vector (1).png"
+import {BsChevronLeft} from "react-icons/bs"
+import { useNavigate } from 'react-router-dom'
 
 const Cvpage = () => {
 
     const location = useLocation()
     const { cv = {} } = location.state || {};
 
+    const [close, setClose] = useState(true)
+    const navigate = useNavigate ()
+
+
+    const handlegoingmainpage =  () => {
+        navigate("/")
+        localStorage.clear()
+         
+      }
+
     console.log(cv)
     return (
         <div>
 
             <div className='cv--div'>
+            <button 
+                className='back-btn-cv'
+                onClick = {handlegoingmainpage}>
+             
+
+                <BsChevronLeft
+                className='backicon'
+              /></button>
                 <div className='cv--main-div '>
                     <div className='cv-section--1'>
                         <div className='cv-namesurname-div'>
@@ -111,8 +133,25 @@ const Cvpage = () => {
                         <img className="uploadedphoto" src={`https://resume.redberryinternship.ge/${cv.image}`} alt=""></img>
                     </div>
 
-                <img className="Logo--cv" src={logo1} alt=""></img>
+                    <img className="Logo--cv" src={logo1} alt=""></img>
                 </div>
+
+                {close &&
+                    <div
+
+                      
+                        className='congratulate'>
+                        <img 
+                        
+                        onClick={
+                            () =>
+                                setClose(false)
+                        }
+                        className='vector' src={vector}></img>
+                        <img className='congrats-note' src={congrats} alt=""></img>
+
+                    </div>
+                }
             </div>
         </div>
     )

@@ -7,6 +7,7 @@ import "./experiences.css"
 import Dates from './components/dates'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { BsFillExclamationTriangleFill } from "react-icons/bs"
 
 const ExperiencePage = () => {
 
@@ -115,7 +116,7 @@ const ExperiencePage = () => {
         errors.start_date = "აუცილებელია შეავსოთ ველი"
       }
       if (!exp.due_date) {
-        errors.edue_date = "აუცილებელია შეავსოთ ველი"
+        errors.due_date = "აუცილებელია შეავსოთ ველი"
       }
       if (!exp.description) {
         errors.description = "აუცილებელია შეავსოთ ველი"
@@ -172,6 +173,11 @@ const ExperiencePage = () => {
                   error={error[index] && error[index].position}
 
                 />
+                {
+                  error[index] &&  error[index].position ? <BsFillExclamationTriangleFill
+                    className='Exclamation-icon-err-pos' /> : ""
+
+                }
                 <LargeInput
                   formDataName="employer"
                   formData={experience.employer}
@@ -181,6 +187,11 @@ const ExperiencePage = () => {
                   value={experience.employer}
                   error={error[index] && error[index].employer}
                 />
+                 {
+                  error[index] &&  error[index].employer? <BsFillExclamationTriangleFill
+                    className='Exclamation-icon-err-emp' /> : ""
+
+                }
 
                 <div className='dates'>
                   <Dates
@@ -202,13 +213,13 @@ const ExperiencePage = () => {
                 </div>
 
                 <div className='Description-div'>
-                  <h2 className={error[index] && error[index].description ? 'Description-h2--err':"Description-h2"}
-                  
+                  <h2 className={error[index] && error[index].description ? 'Description-h2--err' : "Description-h2"}
+
                   >აღწერა</h2>
                   <textarea
                     type="text"
                     placeholder='როლი თანამდებობაზე და ზოგადი აღწერა'
-                    className={error[index] && !error[index].description ? "Description-input--corr":'Description-input'}
+                    className={error[index] && !error[index].description ? "Description-input--corr" : 'Description-input'}
                     name="description"
                     value={experience.description}
                     onChange={(e) => handleChange(e, index)}
