@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BsChevronDown, BsChevronUp } from "react-icons/bs"
 
 
@@ -6,49 +6,56 @@ import { BsChevronDown, BsChevronUp } from "react-icons/bs"
 
 const Degrees = ({
     degrees,
-    isActive,
-    degreeSelected,
-    setDegreeSelected,
-    setIsActive,
+    // isActive,
+ 
+    // setIsActive,
+    degreeTitle,
     value,
-    setFormData,
     name,
-    handleChange
+    handleChange,
+    error,
+    index
+
 }) => {
+    const [isActive, setIsActive] = useState(false)
+    console.log(degreeTitle)
+    // console.log (index)
+
+    // const handleClick = (name, id) => {
+
+    //     setDegreeSelected(name)
+    //     setIsActive(false)
+
+    //  degreeArray[index] = name
+    //     setDegreeArray (degreeArray)
+
+    //     setFormData((prevValue) => {
+    //         return (
+    //             {
+    //                 ...prevValue,
+    //                 educations: prevValue.educations.map((edu) => {
+    //                     return { ...edu, degree: name }
+    //                 })
+    //             }
+    //         )
+    //     })
 
 
-    const handleClick = (name) => {
-        setDegreeSelected(name)
-        setIsActive(false)
+    //  }
 
-        setFormData((prevValue) => {
-            return (
-                {
-                    ...prevValue,
-                    educations: prevValue.educations.map((edu) => {
-                        return { ...edu, degree: name }
-                    })
-                }
-            )
-        })
-
-
-    }
     return (
         <div className='degree-div'>
-            <h2 className='degree-hd'>ხარისხი</h2>
+            <h2 className={error ? "degree-hd-err " : 'degree-hd'}>ხარისხი</h2>
             <div
-
-                className='degree-dropdown'>
-
+                className={degreeTitle ? "degree-dropdown-sel" : 'degree-dropdown'}>
                 <div
-                    onChange={handleChange}
+
+
                     onClick={(e) => {
                         setIsActive(!isActive)
-
                     }}
                     className='dropdown-btn'>
-                    {degreeSelected ? degreeSelected : "აირჩიეთ ხარისხი"
+                    {degreeTitle ?degreeTitle : "აირჩიეთ ხარისხი"
                     }
                     {
                         !isActive ?
@@ -61,22 +68,22 @@ const Degrees = ({
 
                         className='dropdown--content'>
                         {
-                            degrees.map((degree, index) => {
+                            degrees.map((degree) => {
                                 return (
                                     <div
 
 
-                                        name={name}
                                         value={value}
                                         onClick={() => {
-                                            handleClick(degree.title, degree.id, index)
+                                            handleChange(degree.title, degree.id, index)
                                         }}
                                         className="dropdownItem"
-                                        key={index}>
+                                        key={degree.id}>
                                         {degree.title}</div>
                                 )
                             })}
                     </div>}
+                <p className='note '>{error ? error : ""}</p>
             </div>
         </div>
     )
